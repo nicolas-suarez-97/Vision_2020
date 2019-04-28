@@ -75,7 +75,7 @@
         </a>        
     </div>
 
-    <div style="padding:0.5cm" class="table-responsive ">
+    <div class="table-responsive ">
         
         <h1 class="col-3">Novedades</h1>           
         
@@ -100,7 +100,7 @@
             <tbody>
                 <?php foreach($novedades as $novedad):?>                
                     <tr>
-                        <td><img height="20px"                             
+                        <td><img height="20px" style="border-radius:100%"                     
                             src="img/<?php  if($novedad['importancia']==0){echo 'check.png';} 
                                             if($novedad['importancia']==1){echo 'rojo.png';} 
                                             if($novedad['importancia']==2){echo 'amarillo.png';} 
@@ -142,7 +142,7 @@
     </div>
     
 
-    <div style="padding:0.5cm" class="table-responsive ">
+    <div class="table-responsive ">
         <div class="mt-5  row">
             <h1 class="col-3">Clientes</h1>           
         </div>

@@ -133,7 +133,7 @@
                 <div class="col"></div>
                 <div class="col">
                     <div class="custom-control custom-checkbox mr-sm-2 ">
-                        <input type="checkbox" class="custom-control-input"  id="cambio" name="cambio" value="true" >
+                        <input type="checkbox" class="custom-control-input"  id="cambio" name="cambio" <?php if($resultado_unico['cambioEquipo']==1){echo 'checked';}?>>
                         <label class="custom-control-label"  for="cambio" >Se necesitó cambiar o retirar equipos</label>
                     </div>                
                 </div>
