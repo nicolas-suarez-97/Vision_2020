@@ -16,6 +16,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="css/index.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <title>Visión 2020</title>
   </head>
   <body >
@@ -32,7 +33,7 @@
             <div class="row">
                 <div class="col">
                     <label>Fecha</label>                    
-                    <input type="date" class="form-control" name="fecha">                    
+                    <input  class="form-control" name="fecha" value="<?php echo date('Y/m/d  ')?>" >                    
                 </div>
                 <div class="col">
                     <label>No. de Reporte</label>                    
@@ -47,48 +48,65 @@
 
             <div class="row mt-3">
                 <div class="col ">
-                    <label>NIT</label>                                           
-                    <select class="custom-select mr-sm-2" id="nit" name="nit" >
+                    <label>NIT</label>  
+                    <select class="custom-select mr-sm-2" id="nit" name="nit" required>
                         <option selected></option>
                         <?php foreach ($resultado as $usuario):?>      
-                            <option value="<?php echo $usuario['id']?>"><?php echo $usuario['nit']?></option>
+                        <option value="<?php echo $usuario['id']?>"><?php echo $usuario['nit']." - ".$usuario['nombres']." ".$usuario['apellidos']?></option>
                         <?php endforeach?>                                                      
                     </select>                                        
-                </div>                
-                <div class="col">
-                    <label>Nombre</label>                                    
-                    <input type="text" class="form-control" placeholder="" >                                    
-                </div>
-            </div>   
-            <div class="row mt-3">
-                <div class="col ">
-                    <label>Plan de Internet</label>                                           
-                    <input type="text" class="form-control" placeholder="">                                        
-                </div> 
-                <div class="col ">
-                    <label>Telefono</label>                                           
-                    <input type="number" class="form-control" placeholder="Ej: 320 399 7741">                                        
-                </div>     
+                    <h6 style="color:red">*Seleccione al cliente en la siguiente tabla</h6>                                         
+                </div>                               
+            </div>  
+            <br/>
+            <div class="table-responsive ">            
+                <table class="table table-hover " id="example" style="width:100%">
+                    <thead >
+                        <tr>
+                            <th scope="col">Nit</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Dirección</th>                          
+                            <th scope="col">Plan</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col"></th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($resultado as $usuario):?>                
+                            <tr>
+                                <th><?php echo $usuario['nit'];?></th>
+                                <td><?php echo $usuario['nombres'];?></td>
+                                <td><?php echo $usuario['apellidos'];?></td>
+                                <td><?php echo $usuario['telefono'];?></td>
+                                <td><?php echo $usuario['email'];?></td>
+                                <td><?php echo $usuario['direccion'];?></td>                               
+                                <td><?php echo $usuario['plan'];?></td>
+                                <td><?php echo $usuario['valor'];?></td>
+                                
+                                <td>                                    
+                                    <button type="button" class="btn btn-outline-danger" onclick="nit.value=<?php echo $usuario['id']?>">
+                                        Seleccionar
+                                    </button>                                    
+                                </td>                       
+                            </tr>                    
+                        <?php endforeach?>            
+                    </tbody>
+                </table>
+                
             </div>
-            <div class=" mt-3 row ">
-                <label class="col-sm-2 col-form-label">Dirección</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control"  placeholder="Ej: Calle 3 No. 4- 11">
-                </div>
-            </div>
-            <div class=" mt-3 row ">
-                <label class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
-                    <input type="email" class="form-control"  placeholder="Ej: vision2020@gmail.com">
-                </div>
-            </div>
+           
+           
             <br>
             <h3>Información Novedad</h3>
 
             <div class=" mt-3 row ">
                 <label class="col-sm-2 col-form-label">Motivo:</label>
                 <div class="col-sm-10">
-                    <select class="custom-select mr-sm-2" id="motivo" name="motivo">
+                    <select class="custom-select mr-sm-2" id="motivo" name="motivo" required>
                         <option value=""></option>
                         <option value="No tiene internet">No tiene internet</option>
                         <option value="Intermitencia">Intermitencia</option>
@@ -130,7 +148,7 @@
             <div class=" mt-3 row ">
                 <label class="col-sm-2 col-form-label">Costo de la visita:</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control"  placeholder="" id="costo" name="costo">
+                    <input type="number" class="form-control"  placeholder="" id="costo" name="costo" required>
                 </div>
             </div>
 
@@ -147,5 +165,12 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#example').DataTable();
+            
+        } );
+    </script>
   </body>
 </html>

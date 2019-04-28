@@ -6,11 +6,43 @@
     $gsent->execute();
     $resultado = $gsent->fetchAll();
 
-    $sql_categ = 'SELECT n.idReporte,u.nombres,u.nit,u.telefono,n.motivo,n.diagnostico,n.costo,n.fechaCreacion FROM novedad n, usuarios u WHERE n.idUsuario = u.id';
+    $sql_categ = 'SELECT n.idReporte,u.nombres,u.nit,u.telefono,n.motivo,n.diagnostico,n.costo,n.fechaCreacion,n.estado FROM novedad n, usuarios u WHERE n.idUsuario = u.id';
     $gsentNov = $pdo->prepare($sql_categ);
     $gsentNov->execute();
     $novedades = $gsentNov->fetchAll();
+    
+    $fechaActual=date("Y/m/d");
+    for( $i = 0; $i < sizeof($novedades); $i++){                      
+        $fechaInicial = $novedades{$i}['fechaCreacion'];
+        $fechaActual = date('Y-m-d'); // la fecha del ordenador
+                        
+        $diff = abs(strtotime($fechaActual) - strtotime($fechaInicial));
+                
+        $years = floor($diff / (365*60*60*24));        
+        $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));        
+        $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+
+        if($novedades{$i}['estado']=="Solucionado"){
+            $novedades{$i}['importancia']=0;
+        }else{
+            if($months!=0){
+                $novedades{$i}['importancia']=1;
+            }else{
+                if($days>=0)
+                    $novedades{$i}['importancia']=3;
+                if($days>7)            
+                    $novedades{$i}['importancia']=2;
+                if($days>14)
+                    $novedades{$i}['importancia']=1;
+                
+                
+                
+            }
+        }
+        
+    }
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -50,6 +82,7 @@
         <table class="table table-hover  " id="novedad" style="width:100%">
             <thead class="">
                 <tr>
+                    <th scope="col"></th>  
                     <th scope="col">No. Reporte</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">NIT</th>
@@ -60,12 +93,24 @@
                     <th scope="col">Fecha</th>
                     <th scope="col">Estado</th>                    
                     <th scope="col"></th>
+                    <th scope="col"></th>
                     
                 </tr>
             </thead>
             <tbody>
                 <?php foreach($novedades as $novedad):?>                
                     <tr>
+                        <td><img height="20px"                             
+                            src="img/<?php  if($novedad['importancia']==0){echo 'check.png';} 
+                                            if($novedad['importancia']==1){echo 'rojo.png';} 
+                                            if($novedad['importancia']==2){echo 'amarillo.png';} 
+                                            if($novedad['importancia']==3){echo 'verde.png';} ?>"/>
+                            <h6 style="display:none"><?php   if($novedad['importancia']==0){echo '4';} 
+                                    if($novedad['importancia']==1){echo '1';} 
+                                    if($novedad['importancia']==2){echo '2';} 
+                                    if($novedad['importancia']==3){echo '3';} ?>
+                            </h6>
+                        </td>   
                         <th><?php echo $novedad['idReporte'];?></th>
                         <td><?php echo $novedad['nombres'];?></td>
                         <td><?php echo $novedad['nit'];?></td>
@@ -74,21 +119,28 @@
                         <td><?php echo $novedad['diagnostico'];?></td>
                         <td><?php echo $novedad['costo'];?></td>
                         <td><?php echo $novedad['fechaCreacion'];?></td>                        
-                        <td></td>    
+                        <td><?php echo $novedad['estado'];?></td>    
                         <td>
                             <a href="modificarNovedad.php?id=<?php echo $novedad['idReporte']?>"> 
                                 <button type="button" class="btn btn-primary" >
-                                    Editar
+                                    Ver
                                 </button>
                             </a>
-                        </td>                       
+                        </td>  
+                        <td>
+                            <a href="php/solucionar.php?id=<?php echo $novedad['idReporte']?>"> 
+                                <button type="button" class="btn btn-outline-danger" <?php if($novedad['estado']=="Solucionado"){echo 'disabled';}?>>
+                                    Solucionado
+                                </button>
+                            </a>
+                        </td>                         
                     </tr>                    
                 <?php endforeach?>            
             </tbody>
         </table>
         
     </div>
-
+    
 
     <div style="padding:0.5cm" class="table-responsive ">
         <div class="mt-5  row">

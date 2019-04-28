@@ -20,11 +20,11 @@ $modificacion = date("Y/m/d");
     
     header('location:../index.php');    
     include_once 'conexion.php';
-    $sql_agregar = 'INSERT INTO novedad (idReporte,motivo,diagnostico,cambioEquipo,descripEquipo,observaciones,costo,idUsuario,fechaCreacion,fechaModificacion) VALUES (?,?,?,?,?,?,?,?,?,?)';
+    $sql_agregar = 'INSERT INTO novedad (idReporte,motivo,diagnostico,cambioEquipo,descripEquipo,observaciones,costo,idUsuario,fechaCreacion,fechaModificacion,estado) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
     $sentencia_agregar = $pdo->prepare($sql_agregar);
     
     
-    if($sentencia_agregar->execute(array($noReporte,$motivo,$diagnostico,$cambiarEquipo,$descripEquipo,$observaciones,$costo,$idUsuario,$fecha,$modificacion))){
+    if($sentencia_agregar->execute(array($noReporte,$motivo,$diagnostico,$cambiarEquipo,$descripEquipo,$observaciones,$costo,$idUsuario,$fecha,$modificacion,"Pendiente"))){
         echo '<br> Agregado <br>';
     }else{
         echo '<br> Error <br>';

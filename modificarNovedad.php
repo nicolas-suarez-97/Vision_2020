@@ -46,6 +46,7 @@
             <div class="col">
                 <h6 class="row">Creación: <?php echo $resultado_unico['fechaCreacion'];?></h6>
                 <h6 class="row">Modificación: <?php echo $resultado_unico['fechaModificacion'];?></h6>
+                <h6 class="row" style="font-weight:bold">Estado: <?php echo $resultado_unico['estado'];?></h6>
             </div>
         </div>
         <br> 
@@ -54,11 +55,11 @@
             <div class="row">
                 <div class="col">
                     <label>Fecha</label>                    
-                    <input type="text" class="form-control" name="fecha" disabled value="<?php echo $resultado_unico['fechaCreacion'];?>">                    
+                    <input type="text" class="form-control" name="fecha"  value="<?php echo $resultado_unico['fechaCreacion'];?>" disabled>                    
                 </div>
                 <div class="col">
                     <label>No. de Reporte</label>                    
-                    <input type="number" class="form-control" placeholder="" name="noReporte" required disabled value="<?php echo $resultado_unico['idReporte'];?>">                    
+                    <input type="number" class="form-control" placeholder="" name="noReporte" required  value="<?php echo $resultado_unico['idReporte'];?>" disabled>                    
                 </div>
             </div>
             <br>
@@ -159,7 +160,7 @@
 
             <div class="row mt-5">            
                 <div class="col">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Actualizar</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" <?php if($resultado_unico['estado']=="Solucionado"){echo 'disabled';}?>>Actualizar</button>
                 </div>
                
                 <a href="php/eliminarNovedad.php?id=<?php echo $resultado_unico['idReporte'];?>" class="col">                    
