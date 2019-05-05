@@ -31,6 +31,11 @@
                     </li>    
                     <li class="nav-item active" style="padding-left:0.5cm;padding-right:0.5cm;">
                         <a class="nav-link" href="crearNovedad.php">Crear Novedad </a>
+                    </li>
+                    <li class="nav-item active" style="padding-left:0.5cm;padding-right:0.5cm;">
+                        <a class="nav-link" href="exportar.php">Exportar 
+                            <img src="img/microsoft-excel-2013.png" style="height:30px; width:30px;">
+                        </a>
                     </li>                              
                 </ul>                
             </div>            

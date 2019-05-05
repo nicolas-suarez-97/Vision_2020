@@ -16,7 +16,7 @@
         $fechaInicial = $novedades{$i}['fechaCreacion'];
         $fechaActual = date('Y-m-d'); // la fecha del ordenador
                         
-        $diff = abs(strtotime($fechaActual) - strtotime($fechaInicial));
+        $diff = strtotime($fechaActual) - strtotime($fechaInicial);
                 
         $years = floor($diff / (365*60*60*24));        
         $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));        
