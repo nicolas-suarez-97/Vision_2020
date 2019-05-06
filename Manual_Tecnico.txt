@@ -1,0 +1,16 @@
+Autor: Nicolás Suárez Jiménez
+Universidad: Pontificia Universidad Javeriana
+ 
+Proyecto Social Universitario
+Fundación Visión 20-20
+
+Manual Técnico
+El siguiente manual explica como está estructurado el sistema de manejo de novedades y usuarios.
+El sistema esta desarrollado en PHP con base de datos en PhpMyAdmin, al mismo tiempo se hace uso del framework Bootstrap para la interfaz visual.
+
+Todas las vistas del sistema se encuentran en la carpeta principal, estas son index, crearNovedad, crearUsuario, exportar, modificarNovedad y modificarUsuario. 
+
+Dentro de la carpeta 'php' se encuentran los procedimientos que se encargan de tomar la información ingresada en las vistas para procesarla y enviarla a la base de datos.
+De la misma forma en la carpeta principal se encuentran los archivos para crear las tablas de la base de datos, estas son usuarios y novedades.
+
+
