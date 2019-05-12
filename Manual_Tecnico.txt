@@ -1,4 +1,4 @@
-Autor: Nicolás Suárez Jiménez
+﻿Autor: Nicolás Suárez Jiménez
 Universidad: Pontificia Universidad Javeriana
  
 Proyecto Social Universitario
@@ -8,9 +8,28 @@ Manual Técnico
 El siguiente manual explica como está estructurado el sistema de manejo de novedades y usuarios.
 El sistema esta desarrollado en PHP con base de datos en PhpMyAdmin, al mismo tiempo se hace uso del framework Bootstrap para la interfaz visual.
 
-Todas las vistas del sistema se encuentran en la carpeta principal, estas son index, crearNovedad, crearUsuario, exportar, modificarNovedad y modificarUsuario. 
+- Todas las vistas del sistema se encuentran en la carpeta principal, estas son index, crearNovedad, crearUsuario, exportar, modificarNovedad y modificarUsuario. 
+    * index.php: Es la primera pantalla que se aprecia del sistema, allí se realizan las consultas a la base de datos para construir las tablas de novedades y clientes.
+      De la misma forma allí se asigna el color del estado de las novedades.
+    * crearUsuario.php: En esta vista es donde se ingresan los datos básicos del usuarios y haciendo uso del procedimiento agregarUsuario.php en la carpeta 'php' se agrega el usuario a la base de datos.
+    * crearNoverdad.php: Esta vista permite asignar una novedad a un usuario específico el cuál es seleccionado durante el proceso.
+    * exportar.php: Esta ventana es la encargada de mostrar los posibles filtros a usar al momento de exportar el archvo excel. Hace uso del procedimiento excel.php en la carpeta 'php'.
+    * modificarNovedad.php: Vista que muestra los detalles de una novedad y permite modificar o eliminar la novedad.
+    * modificarUsuario.php: Al igual que modificarNovedad permite visualizar los detalles de un usuario, modificarlos o incluso eliminar el registro.
 
-Dentro de la carpeta 'php' se encuentran los procedimientos que se encargan de tomar la información ingresada en las vistas para procesarla y enviarla a la base de datos.
-De la misma forma en la carpeta principal se encuentran los archivos para crear las tablas de la base de datos, estas son usuarios y novedades.
+
+- Dentro de la carpeta 'php' se encuentran los procedimientos que se encargan de tomar la información ingresada en las vistas para procesarla y enviarla a la base de datos.    
+    * php/conexion.php: Procediminto que se encarga de realizar la conexión a la base de datos y se configura el host, el nombre de la base de datos, usuario y contraseña.
+    * php/actualizarNovedad.php: Procedimiento que actualiza las modificaciones realizadas en la vista modificarNovedad.
+    * php/actualizarUsuario.php: Procedimiento que actualiza los datos modificados al usuario por medio de la vista modificarUsuario.
+    * php/agregarNovedad.php: Creación de una novedad en la base de datos.
+    * php/agregarUsuario.php: Creación de un cliente al interior de la base de datos.
+    * php/eliminarNovedad.php: En caso de ser necesario este procedimiento elimina los datos de una novedad en la base de datos.
+    * php/eliminarUsuario.php: Eliminación de datos de un usuario.
+    * php/excel.php: Procedimiento encargado de exportar los datos de la base de datos a excel.
+    * php/navbar.php: Código que compila la barra de navegación superior.
+    * php/solucionar.php: Procedimiento que marca una novedad como solucionada.
+
+- De la misma forma en la carpeta principal se encuentran los archivos para crear las tablas de la base de datos, estas son usuarios y novedades. En caso de ser necesaria alguna modificación de campos es necesario ingresar a PhpMyAdmin y agregar o eliminar el campo necesario. 
 
 

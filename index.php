@@ -21,7 +21,7 @@
         $years = floor($diff / (365*60*60*24));        
         $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));        
         $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
-
+        //--------------------Asignación de color del estado
         if($novedades{$i}['estado']=="Solucionado"){
             $novedades{$i}['importancia']=0;
         }else{
